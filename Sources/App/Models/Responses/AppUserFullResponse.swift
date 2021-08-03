@@ -11,7 +11,7 @@ import Vapor
 import Foundation
 
 struct AppUserFullResponse: Content {
-    var username: String
+    var email: String
     var firstName: String
     var lastName: String
     var userID: UUID

@@ -23,7 +23,7 @@ extension AppUserController.Unprotected: RouteCollection {
 
         guard  create.password == create.confirmPassword else { throw Abort(.badRequest, reason: "Passwords didn't match") }
 
-        let user = try AppUser(firstName: create.firstName, lastName: create.lastName, username: create.username, passwordHash: Bcrypt.hash(create.password, cost: 10))
+        let user = try AppUser(firstName: create.firstName, lastName: create.lastName, email: create.email, passwordHash: Bcrypt.hash(create.password, cost: 10))
         let token = try req.jwt.sign(user)
 
         return user.save(on: req.db).flatMap {

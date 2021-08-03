@@ -35,20 +35,20 @@ final class AppUser: Model, Content {
     var sharedPlantIds: [String]
     
     var response: AppUserResponse {
-        .init(username: email, firstName: firstName, lastName: lastName, userID: id!)
+        .init(email: email, firstName: firstName, lastName: lastName, userID: id!)
     }
 
     var fullResponse: AppUserFullResponse {
-        .init(username: email, firstName: firstName, lastName: lastName, userID: id!, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
+        .init(email: email, firstName: firstName, lastName: lastName, userID: id!, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
     }
     
     init() {}
     
-    init(id: UUID? = nil, firstName: String, lastName: String,username: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
+    init(id: UUID? = nil, firstName: String, lastName: String, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
-        self.email = username
+        self.email = email
         self.passwordHash = passwordHash
         self.plantIds = plantIds
         self.sharedPlantIds = sharedPlantIds
@@ -56,7 +56,7 @@ final class AppUser: Model, Content {
 }
 
 extension AppUser: ModelAuthenticatable {
-    static let usernameKey = \AppUser.$email
+    static let emailKey = \AppUser.$email
     static let passwordHashKey = \AppUser.$passwordHash
     
     func verify(password: String) throws -> Bool {
