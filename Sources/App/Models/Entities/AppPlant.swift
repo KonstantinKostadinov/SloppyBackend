@@ -14,7 +14,7 @@ final class AppPlant: Model, Content {
     static let schema: String = "plants"
 
     @ID(key: .id)
-    var id: String?
+    var id: UUID?
 
     @Field(key: "origin")
     var origin: String
@@ -64,7 +64,7 @@ final class AppPlant: Model, Content {
     
     init() { }
 
-    init(id: String? = nil, origin: String, name: String, scientificName: String, maxGrowth: String, poisonousToPets: String, temperature: String, light: String, watering: String, soil: String, rePotting: String, airHumidity: String, propagation: String, whereItGrowsBest: String, potentialProblems: [String]) {
+    init(id: UUID? = nil, origin: String, name: String, scientificName: String, maxGrowth: String, poisonousToPets: String, temperature: String, light: String, watering: String, soil: String, rePotting: String, airHumidity: String, propagation: String, whereItGrowsBest: String, potentialProblems: [String]) {
         self.id = id
         self.origin = origin
         self.name = name

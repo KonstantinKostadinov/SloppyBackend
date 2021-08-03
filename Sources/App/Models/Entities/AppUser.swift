@@ -14,7 +14,7 @@ final class AppUser: Model, Content {
     static let schema: String = "users"
     
     @ID(key: .id)
-    var id: String?
+    var id: UUID?
     
     @Field(key: "firstName")
     var firstName: String
@@ -44,7 +44,7 @@ final class AppUser: Model, Content {
     
     init() {}
     
-    init(id: String? = nil, firstName: String, lastName: String, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
+    init(id: UUID? = nil, firstName: String, lastName: String, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
