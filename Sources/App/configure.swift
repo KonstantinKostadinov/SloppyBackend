@@ -11,7 +11,15 @@ public func configure(_ app: Application) throws {
 
    // app.http.server.configuration.port = 4200
     
-    try app.databases.use(.postgres(url: Environment.databaseURL), as: .psql)
+   // try app.databases.use(.postgres(url: Environment.databaseURL), as: .psql)
+    if let databaseURL = Environment.get("DATABASE_URL"), var postgresConfig = PostgresConfiguration(url: databaseURL) {
+        postgresConfig.tlsConfiguration = .forClient(certificateVerification: .none)
+        app.databases.use(.postgres(
+            configuration: postgresConfig
+        ), as: .psql)
+    } else {
+        // ...
+    }
     //databases(databases: app.databases)
     migrate(migrations: app.migrations)
 
