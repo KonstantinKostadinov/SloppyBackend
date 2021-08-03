@@ -3,6 +3,7 @@ import FluentPostgresDriver
 import Vapor
 import Mailgun
 
+
 // configures your application
 public func configure(_ app: Application) throws {
     // uncomment to serve files from /Public folder
@@ -11,7 +12,6 @@ public func configure(_ app: Application) throws {
    // app.http.server.configuration.port = 4200
     
     try app.databases.use(.postgres(url: Environment.databaseURL), as: .psql)
-
     //databases(databases: app.databases)
     migrate(migrations: app.migrations)
 
