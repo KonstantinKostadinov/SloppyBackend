@@ -18,7 +18,7 @@ struct AppUserRequest: Content {
 
 extension AppUserRequest: Validatable {
     static func validations(_ validations: inout Validations) {
-        validations.add("email", as: String.self, is: .alphanumeric)
+        validations.add("email", as: String.self, is: .email)
         validations.add("firstName", as: String.self, is: .count(3...) && .ascii)
         validations.add("lastName", as: String.self, is: .count(3...) && .ascii)
         validations.add("password", as: String.self, is: .count(6...))
