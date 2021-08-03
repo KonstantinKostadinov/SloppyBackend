@@ -8,8 +8,11 @@ public func configure(_ app: Application) throws {
     // uncomment to serve files from /Public folder
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    app.http.server.configuration.port = 4200
-    databases(databases: app.databases)
+   // app.http.server.configuration.port = 4200
+    
+    try app.databases.use(.postgres(url: Environment.databaseURL), as: .psql)
+
+    //databases(databases: app.databases)
     migrate(migrations: app.migrations)
 
 //    app.mailgun.configuration = .environment

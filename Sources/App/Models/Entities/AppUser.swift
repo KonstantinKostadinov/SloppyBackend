@@ -39,7 +39,7 @@ final class AppUser: Model, Content {
     }
 
     var fullResponse: AppUserFullResponse {
-        .init(username: email, firstName: firstName, lastName: lastName, userID: String, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
+        .init(username: email, firstName: firstName, lastName: lastName, userID: id!, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
     }
     
     init() {}
