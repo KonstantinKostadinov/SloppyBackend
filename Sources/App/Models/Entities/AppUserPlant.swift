@@ -13,7 +13,7 @@ final class AppUserPlant: Model, Content {
     static let schema: String = "userPlant"
     
     @ID(key: .id)
-    var id: UUID?
+    var id: String?
 
     @Field(key: "notes")
     var notes: String

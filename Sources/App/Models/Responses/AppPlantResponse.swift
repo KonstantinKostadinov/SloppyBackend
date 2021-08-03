@@ -10,7 +10,8 @@ import Foundation
 
 struct AppPlantResponse: Content {
     var origin: String
-    var names: String
+    var name: String
+    var scientificName: String
     var maxGrowth: String
     var poisonousToPets: String
     var temperature: String

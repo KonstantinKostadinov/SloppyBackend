@@ -14,13 +14,16 @@ final class AppPlant: Model, Content {
     static let schema: String = "plants"
 
     @ID(key: .id)
-    var id: UUID?
+    var id: String?
 
     @Field(key: "origin")
     var origin: String
     
-    @Field(key: "names")
-    var names: String
+    @Field(key: "name")
+    var name: String
+
+    @Field(key: "scientificName")
+    var scientificName: String
     
     @Field(key: "maxGrowth")
     var maxGrowth: String
@@ -56,9 +59,26 @@ final class AppPlant: Model, Content {
     var potentialProblems: [String]
     
     var response: AppPlantResponse {
-        .init(origin: origin, names: names, maxGrowth: maxGrowth, poisonousToPets: poisonousToPets, temperature: temperature, light: light, watering: watering, soil: soil, rePotting: rePotting, airHumidity: airHumidity, propagation: propagation, whereItGrowsBest: whereItGrowsBest, potentialProblems: potentialProblems)
+        .init(origin: origin, name: name, scientificName: scientificName, maxGrowth: maxGrowth, poisonousToPets: poisonousToPets, temperature: temperature, light: light, watering: watering, soil: soil, rePotting: rePotting, airHumidity: airHumidity, propagation: propagation, whereItGrowsBest: whereItGrowsBest, potentialProblems: potentialProblems)
     }
     
     init() { }
 
+    init(id: String? = nil, origin: String, name: String, scientificName: String, maxGrowth: String, poisonousToPets: String, temperature: String, light: String, watering: String, soil: String, rePotting: String, airHumidity: String, propagation: String, whereItGrowsBest: String, potentialProblems: [String]) {
+        self.id = id
+        self.origin = origin
+        self.name = name
+        self.scientificName = scientificName
+        self.maxGrowth = maxGrowth
+        self.poisonousToPets = poisonousToPets
+        self.temperature = temperature
+        self.light = light
+        self.watering = watering
+        self.soil = soil
+        self.rePotting = rePotting
+        self.airHumidity = airHumidity
+        self.propagation = propagation
+        self.whereItGrowsBest = whereItGrowsBest
+        self.potentialProblems = potentialProblems
+    }
 }

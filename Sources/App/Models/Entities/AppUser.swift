@@ -14,7 +14,7 @@ final class AppUser: Model, Content {
     static let schema: String = "users"
     
     @ID(key: .id)
-    var id: UUID?
+    var id: String?
     
     @Field(key: "firstName")
     var firstName: String
@@ -44,7 +44,7 @@ final class AppUser: Model, Content {
     
     init() {}
     
-    init(id: UUID? = nil, firstName: String, lastName: String, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
+    init(id: String? = nil, firstName: String, lastName: String, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
@@ -56,7 +56,7 @@ final class AppUser: Model, Content {
 }
 
 extension AppUser: ModelAuthenticatable {
-    static let emailKey = \AppUser.$email
+    static let usernameKey = \AppUser.$email
     static let passwordHashKey = \AppUser.$passwordHash
     
     func verify(password: String) throws -> Bool {

@@ -14,7 +14,7 @@ struct AppUserFullResponse: Content {
     var email: String
     var firstName: String
     var lastName: String
-    var userID: UUID
+    var userID: String
     var plaintIds: [String]
     var sharedPlantIds: [String]
 }

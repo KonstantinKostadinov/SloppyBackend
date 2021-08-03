@@ -26,5 +26,6 @@ extension Endpoint.API {
     enum Plants {
         static private let plants: [PathComponent] = api + ["plants"]
         static let allPlants: [PathComponent] = plants + ["all"]
+        static let addHousePlant: [PathComponent] = plants + ["addHousePlant"]
     }
 }
