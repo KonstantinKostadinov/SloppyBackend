@@ -12,10 +12,10 @@ import Vapor
 func databases(databases: Databases) {
     databases.use(
         .postgres(
-            hostname: Environment.get("DATABASE_HOST")!,
-            username: Environment.get("DATABASE_USERNAME")!,
-            password: Environment.get("DATABASE_PASSWORD")!,
-            database: Environment.get("DATABASE_NAME")!
+            hostname: Environment.get("DATABASE_HOST") ?? "localhost",
+            username: Environment.get("DATABASE_USERNAME") ?? "lilkosi",
+            password: Environment.get("DATABASE_PASSWORD") ?? "",
+            database: Environment.get("DATABASE_NAME") ?? "planty_backend"
         ),
         as: .psql
     )

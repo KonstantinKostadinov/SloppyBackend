@@ -10,4 +10,5 @@ import Fluent
 func migrate(migrations: Migrations) {
     migrations.add(AppUserMigration())
     migrations.add(AppPlantMigration())
+    migrations.add(AppUserPlantMigration())
 }

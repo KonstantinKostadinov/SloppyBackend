@@ -23,6 +23,6 @@ extension AppPlantsController.TokenProtected: RouteCollection {
     }
 
     func boot(routes: RoutesBuilder) throws {
-        routes.get(Endpoint.API.Plants, use: fetchAllPlants)
+        routes.get(Endpoint.API.Plants.allPlants, use: fetchAllPlants)
     }
 }

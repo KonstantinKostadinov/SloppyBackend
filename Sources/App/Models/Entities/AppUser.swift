@@ -22,30 +22,41 @@ final class AppUser: Model, Content {
     @Field(key: "lastName")
     var lastName: String
     
-    @Field(key: "username")
-    var username: String
+    @Field(key: "email")
+    var email: String
     
     @Field(key: "passwordHash")
     var passwordHash: String
 
+    @Field(key: "plantIds")
+    var plantIds: [String]
+
+    @Field(key: "sharedPlantIds")
+    var sharedPlantIds: [String]
     
     var response: AppUserResponse {
-        .init(username: username, firstName: firstName, lastName: lastName, userID: id!)
+        .init(username: email, firstName: firstName, lastName: lastName, userID: id!)
+    }
+
+    var fullResponse: AppUserFullResponse {
+        .init(username: email, firstName: firstName, lastName: lastName, userID: String, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
     }
     
     init() {}
     
-    init(id: UUID? = nil, firstName: String, lastName: String,username: String, passwordHash: String){
+    init(id: UUID? = nil, firstName: String, lastName: String,username: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
         self.id = id
         self.firstName = firstName
         self.lastName = lastName
-        self.username = username
+        self.email = username
         self.passwordHash = passwordHash
+        self.plantIds = plantIds
+        self.sharedPlantIds = sharedPlantIds
     }
 }
 
 extension AppUser: ModelAuthenticatable {
-    static let usernameKey = \AppUser.$username
+    static let usernameKey = \AppUser.$email
     static let passwordHashKey = \AppUser.$passwordHash
     
     func verify(password: String) throws -> Bool {
