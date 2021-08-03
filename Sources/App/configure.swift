@@ -13,7 +13,7 @@ public func configure(_ app: Application) throws {
     
    // try app.databases.use(.postgres(url: Environment.databaseURL), as: .psql)
     if let databaseURL = Environment.get("DATABASE_URL"), var postgresConfig = PostgresConfiguration(url: databaseURL) {
-        postgresConfig.tlsConfiguration = .forClient(certificateVerification: .none)
+        postgresConfig.tlsConfiguration = .forClient(certificateVerification: .fullVerification)
         app.databases.use(.postgres(
             configuration: postgresConfig
         ), as: .psql)
