@@ -12,8 +12,6 @@ import Foundation
 
 struct AppUserFullResponse: Content {
     var email: String
-    var firstName: String
-    var lastName: String
     var userID: UUID?
     var plaintIds: [String]
     var sharedPlantIds: [String]

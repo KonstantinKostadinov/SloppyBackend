@@ -39,6 +39,5 @@ extension AppPlantRequest: Validatable {
         validations.add("airHumidity", as: String.self, is: .count(3...) && .ascii)
         validations.add("propagation", as: String.self, is: .count(3...) && .ascii)
         validations.add("whereItGrowsBest", as: String.self, is: .count(3...) && .ascii)
-        validations.add("potentialProblems", as: String.self, is: .count(3...) && .ascii)
     }
 }

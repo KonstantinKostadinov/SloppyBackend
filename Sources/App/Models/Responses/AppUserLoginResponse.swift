@@ -8,6 +8,6 @@
 import Vapor
 
 struct AppUserLoginResponse: Content {
-    let user: AppUserResponse
+    let user: AppUserFullResponse
     let accessToken: String
 }

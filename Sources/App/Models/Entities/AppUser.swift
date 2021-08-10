@@ -15,13 +15,7 @@ final class AppUser: Model, Content {
     
     @ID(key: .id)
     var id: UUID?
-    
-    @Field(key: "firstName")
-    var firstName: String
-    
-    @Field(key: "lastName")
-    var lastName: String
-    
+
     @Field(key: "email")
     var email: String
     
@@ -35,19 +29,17 @@ final class AppUser: Model, Content {
     var sharedPlantIds: [String]
     
     var response: AppUserResponse {
-        .init(email: email, firstName: firstName, lastName: lastName, userID: id!)
+        .init(email: email, userID: id!)
     }
 
     var fullResponse: AppUserFullResponse {
-        .init(email: email, firstName: firstName, lastName: lastName, userID: id!, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
+        .init(email: email, userID: id!, plaintIds: plantIds, sharedPlantIds: sharedPlantIds)
     }
     
     init() {}
     
-    init(id: UUID? = nil, firstName: String, lastName: String, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
+    init(id: UUID? = nil, email: String, passwordHash: String, plantIds: [String] = [String](), sharedPlantIds: [String] = [String]()){
         self.id = id
-        self.firstName = firstName
-        self.lastName = lastName
         self.email = email
         self.passwordHash = passwordHash
         self.plantIds = plantIds

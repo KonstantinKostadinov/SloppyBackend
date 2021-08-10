@@ -2,22 +2,20 @@
 //  File.swift
 //  
 //
-//  Created by Konstantin Kostadinov on 28.07.21.
+//  Created by Konstantin Kostadinov on 7.08.21.
 //
 
-import Vapor
 import Foundation
+import Vapor
 
-struct AppUserRequest: Content {
+struct AppUserLoginRequest: Content {
     let email: String
     let password: String
-    let confirmPassword: String
 }
 
-extension AppUserRequest: Validatable {
+extension AppUserLoginRequest: Validatable {
     static func validations(_ validations: inout Validations) {
         validations.add("email", as: String.self, is: .email)
         validations.add("password", as: String.self, is: .count(6...))
-        validations.add("confirmPassword", as: String.self, is: .count(6...))
     }
 }

@@ -10,7 +10,5 @@ import Foundation
 
 struct AppUserResponse: Content {
     var email: String
-    var firstName: String
-    var lastName: String
     var userID: UUID?
 }
