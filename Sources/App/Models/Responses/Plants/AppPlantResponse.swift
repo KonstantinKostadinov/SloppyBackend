@@ -9,6 +9,7 @@ import Vapor
 import Foundation
 
 struct AppPlantResponse: Content {
+    var id: UUID
     var origin: String
     var name: String
     var scientificName: String

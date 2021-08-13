@@ -10,5 +10,5 @@ import Foundation
 
 struct AppUserResponse: Content {
     var email: String
-    var userID: UUID?
+    var userID: UUID
 }

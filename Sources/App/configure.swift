@@ -9,7 +9,7 @@ public func configure(_ app: Application) throws {
     // uncomment to serve files from /Public folder
     // app.middleware.use(FileMiddleware(publicDirectory: app.directory.publicDirectory))
 
-    app.http.server.configuration.port = 5400
+    app.http.server.configuration.port = 4200
     
 //   // try app.databases.use(.postgres(url: Environment.databaseURL), as: .psql)
 //    if let databaseURL = Environment.get("DATABASE_URL"), var postgresConfig = PostgresConfiguration(url: databaseURL) {

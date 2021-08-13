@@ -26,6 +26,15 @@ extension Endpoint.API {
     enum Plants {
         static private let plants: [PathComponent] = api + ["plants"]
         static let allPlants: [PathComponent] = plants + ["all"]
-        static let addHousePlant: [PathComponent] = plants + ["addHousePlant"]
+        static let addMainPlant: [PathComponent] = plants + ["addMainPlant"]
+    }
+
+    enum UserPlants {
+        static private let userPlants: [PathComponent] = api + ["userPlants"]
+        static let ownedAndSharedPlants: [PathComponent] = userPlants + ["ownedAndSharedPlants"]
+        static let addOwnPlant: [PathComponent] = userPlants + ["addOwnPlant"]
+        static let shareMyPlant: [PathComponent] = userPlants + ["shareMyPlant"]
+        static let deleteMyPlant: [PathComponent] = userPlants + ["deleteMyPlant"]
+        static let unshareMyPlant: [PathComponent] = userPlants + ["unshareMyPlant"]
     }
 }

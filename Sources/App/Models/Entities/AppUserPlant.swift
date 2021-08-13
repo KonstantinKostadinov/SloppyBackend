@@ -13,7 +13,10 @@ final class AppUserPlant: Model, Content {
     static let schema: String = "userPlant"
     
     @ID(key: .id)
-    var id: String?
+    var id: UUID?
+
+    @Field(key: "parentId")
+    var parentId: UUID
 
     @Field(key: "notes")
     var notes: String
@@ -21,6 +24,28 @@ final class AppUserPlant: Model, Content {
     @Field(key: "timesPlantIsWatered")
     var timesPlantIsWatered: Int
 
+    @Field(key: "name")
+    var name: String
+
+    @Field(key: "lastTimeWatered")
+    var lastTimeWatered: Double
+
     @Field(key: "assignedToFriendsWithIds")
-    var assignedToFriendsWithIds: [String]
+    var assignedToFriendsWithIds: [UUID]
+
+    var newPlantResposne: AppOwnPlantResponse {
+        .init(userPlant: self)
+    }
+
+    init() {}
+
+    init(id: UUID? = nil, parentId: UUID, notes: String, timesPlantIsWatered: Int, name: String, lastTimeWatered: Double/*, assignedToFriedsWithIds: [UUID]*/) {
+        self.id = id
+        self.parentId = parentId
+        self.notes = notes
+        self.timesPlantIsWatered = timesPlantIsWatered
+        self.name = name
+        self.lastTimeWatered = lastTimeWatered
+        self.assignedToFriendsWithIds = [UUID]()
+    }
 }

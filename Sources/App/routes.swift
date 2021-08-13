@@ -25,4 +25,7 @@ func routes(_ app: Application) throws {
 
     let tokenProtectedContainerApi = unprotectedApi.grouped(AppUserAuthenticator())
     try tokenProtectedContainerApi.register(collection: AppPlantsController.TokenProtected())
+
+    let tokenProtectedUserPlantsApi = unprotectedApi.grouped(AppUserAuthenticator())
+    try tokenProtectedUserPlantsApi.register(collection: AppUserPlantsController.TokenProtected())
 }

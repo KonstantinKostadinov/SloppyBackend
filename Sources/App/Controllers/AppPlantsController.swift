@@ -25,7 +25,9 @@ extension AppPlantsController.TokenProtected: RouteCollection {
     func addPlant(req: Request) throws -> EventLoopFuture<Response> {
         try AppPlantRequest.validate(content: req)
         let create = try req.content.decode(AppPlantRequest.self)
-        let plant = AppPlant(origin: create.origin, name: create.name, scientificName: create.scientificName, maxGrowth: create.maxGrowth, poisonousToPets: create.poisonousToPets, temperature: create.temperature, light: create.light, watering: create.watering, soil: create.soil, rePotting: create.rePotting, airHumidity: create.airHumidity, propagation: create.propagation, whereItGrowsBest: create.whereItGrowsBest, potentialProblems: create.potentialProblems)
+        let uuid = UUID()
+        print(uuid)
+        let plant = AppPlant(id: uuid, origin: create.origin, name: create.name, scientificName: create.scientificName, maxGrowth: create.maxGrowth, poisonousToPets: create.poisonousToPets, temperature: create.temperature, light: create.light, watering: create.watering, soil: create.soil, rePotting: create.rePotting, airHumidity: create.airHumidity, propagation: create.propagation, whereItGrowsBest: create.whereItGrowsBest, potentialProblems: create.potentialProblems)
 
         return plant.save(on: req.db).flatMap {
             return DataWrapper.encodeResponse(data: plant.response, for: req)
@@ -34,6 +36,6 @@ extension AppPlantsController.TokenProtected: RouteCollection {
 
     func boot(routes: RoutesBuilder) throws {
         routes.get(Endpoint.API.Plants.allPlants, use: fetchAllPlants)
-        routes.post(Endpoint.API.Plants.addHousePlant, use: addPlant)
+        routes.post(Endpoint.API.Plants.addMainPlant, use: addPlant)
     }
 }

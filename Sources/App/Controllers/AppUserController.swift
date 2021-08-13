@@ -22,8 +22,9 @@ extension AppUserController.Unprotected: RouteCollection {
         let create = try req.content.decode(AppUserRequest.self)
 
         guard  create.password == create.confirmPassword else { throw Abort(.badRequest, reason: "Passwords didn't match") }
-
-        let user = try AppUser(email: create.email, passwordHash: Bcrypt.hash(create.password, cost: 10))
+        let uuid = UUID()
+        print(uuid)
+        let user = try AppUser(id: uuid , email: create.email, passwordHash: Bcrypt.hash(create.password, cost: 10))
         let token = try req.jwt.sign(user)
 
         return user.save(on: req.db).flatMap {
@@ -94,6 +95,7 @@ extension AppUserController.TokenProtected: RouteCollection {
         let user = try req.auth.require(AppUser.self)
         return DataWrapper.encodeResponse(data: user, for: req)
     }
+
     func boot(routes: RoutesBuilder) throws {
         routes.get(Endpoint.API.Users.me, use: showMe)
     }

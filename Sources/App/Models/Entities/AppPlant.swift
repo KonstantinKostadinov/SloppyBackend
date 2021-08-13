@@ -59,7 +59,7 @@ final class AppPlant: Model, Content {
     var potentialProblems: [String]
     
     var response: AppPlantResponse {
-        .init(origin: origin, name: name, scientificName: scientificName, maxGrowth: maxGrowth, poisonousToPets: poisonousToPets, temperature: temperature, light: light, watering: watering, soil: soil, rePotting: rePotting, airHumidity: airHumidity, propagation: propagation, whereItGrowsBest: whereItGrowsBest, potentialProblems: potentialProblems)
+        .init(id: self.id!, origin: origin, name: name, scientificName: scientificName, maxGrowth: maxGrowth, poisonousToPets: poisonousToPets, temperature: temperature, light: light, watering: watering, soil: soil, rePotting: rePotting, airHumidity: airHumidity, propagation: propagation, whereItGrowsBest: whereItGrowsBest, potentialProblems: potentialProblems)
     }
     
     init() { }

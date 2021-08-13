@@ -13,6 +13,6 @@ import Foundation
 struct AppUserFullResponse: Content {
     var email: String
     var userID: UUID?
-    var plaintIds: [String]
-    var sharedPlantIds: [String]
+    var plaintIds: [UUID]
+    var sharedPlantIds: [UUID]
 }

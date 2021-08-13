@@ -13,9 +13,10 @@ import FluentPostgresDriver
 struct AppUserPlantMigration: Migration {
     var name: String {"User plant migration"}
     func prepare(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("userplant").field("id", .string).field("notes", .string).field("timesPlantIsWatered",.int).field("assignedToFriendsWithIds", .array(of: .string)).create()
+        return database.schema("userPlant").field("id", .uuid).field("notes", .string).field("timesPlantIsWatered",.int).field("name", .string
+        ).field("lastTimeWatered", .double).field("parentId", .uuid).field("assignedToFriendsWithIds", .array(of: .uuid)).create()
     }
     func revert(on database: Database) -> EventLoopFuture<Void> {
-        return database.schema("userplant").delete()
+        return database.schema("userPlant").delete()
     }
 }
