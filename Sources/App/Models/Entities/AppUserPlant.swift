@@ -15,8 +15,8 @@ final class AppUserPlant: Model, Content {
     @ID(key: .id)
     var id: UUID?
 
-    @Field(key: "parentId")
-    var parentId: UUID
+    @Parent(key: "parentId")
+    var parentUser: AppUser
 
     @Field(key: "notes")
     var notes: String
@@ -31,21 +31,21 @@ final class AppUserPlant: Model, Content {
     var lastTimeWatered: Double
 
     @Field(key: "assignedToFriendsWithIds")
-    var assignedToFriendsWithIds: [UUID]
+    var assignedToFriendsWithIds: [AppUser.IDValue]
 
-    var newPlantResposne: AppOwnPlantResponse {
+    var newPlantResponse: AppOwnPlantResponse {
         .init(userPlant: self)
     }
 
     init() {}
 
-    init(id: UUID? = nil, parentId: UUID, notes: String, timesPlantIsWatered: Int, name: String, lastTimeWatered: Double/*, assignedToFriedsWithIds: [UUID]*/) {
+    init(id: UUID? = nil, parentId: AppPlant.IDValue, notes: String, timesPlantIsWatered: Int, name: String, lastTimeWatered: Double/*, assignedToFriedsWithIds: [UUID]*/) {
         self.id = id
-        self.parentId = parentId
+        self.$parentUser.id = parentId
         self.notes = notes
         self.timesPlantIsWatered = timesPlantIsWatered
         self.name = name
         self.lastTimeWatered = lastTimeWatered
-        self.assignedToFriendsWithIds = [UUID]()
+        self.assignedToFriendsWithIds = []
     }
 }

@@ -1,10 +1,3 @@
-//
-//  File.swift
-//  
-//
-//  Created by Konstantin Kostadinov on 11.08.21.
-//
-
 import Vapor
 import Foundation
 import Fluent
@@ -26,28 +19,12 @@ extension AppUserPlantsController.TokenProtected: RouteCollection {
         let uuid = UUID()
         print(uuid)
         let newPlant = AppUserPlant(id: uuid, parentId: reqPlant.parentId, notes: reqPlant.notes, timesPlantIsWatered: reqPlant.timesPlantIsWatered, name: reqPlant.name, lastTimeWatered: reqPlant.lastTimeWatered)
-       
-//        return newPlant.save(on: req.db).flatMap { _ in
-//            guard let id = newPlant.id else {
-//                return DataWrapper.encodeResponse(data: Fail.init(message: "mng kur"), for: req)
-//            }
-//            user.plantIds.append(id)
-//            return user.save(on: req.db).flatMap {
-//                return DataWrapper.encodeResponse(data: newPlant.newPlantResposne, for: req)
-//
-//            }
-//
-//        }
-        _ = newPlant.save(on: req.db)
-        return AppUserPlant.query(on: req.db).filter(\.$id == uuid).first().flatMap { (plant) in
-            if let plant = plant {
-                user.plantIds.append(uuid)
-                _ = user.save(on: req.db)
-                return DataWrapper.encodeResponse(data: newPlant.newPlantResposne, for: req)
-                    
-                //}
-            } else {
-                return DataWrapper.encodeResponse(data: Fail.init(message: "failed to add plant to user"), for: req)
+        return newPlant.save(on: req.db).flatMap { _ in
+            return AppUser.find(user.id ?? UUID(), on: req.db).unwrap(or: Abort(.notFound)).flatMap { dbUser in
+                dbUser.plantIds.append(newPlant.id ?? uuid)
+                return dbUser.save(on: req.db).flatMap { _ in
+                    return DataWrapper.encodeResponse(data: newPlant.newPlantResponse, for: req)
+                }
             }
         }
     }
@@ -59,7 +36,11 @@ extension AppUserPlantsController.TokenProtected: RouteCollection {
             if let secondUser = appUser {
                 secondUser.sharedPlantIds.append(reqBody.plantId)
                 _ = secondUser.save(on: req.db)
-                return DataWrapper.encodeResponse(data: Fail.init(message: "Shared succesfully"), for: req)
+                return AppUserPlant.query(on: req.db).filter(\.$id == reqBody.plantId).first().flatMap { (userPlant) in
+                    userPlant?.assignedToFriendsWithIds.append(secondUser.id ?? UUID())
+                    _ = userPlant?.save(on: req.db)
+                    return DataWrapper.encodeResponse(data: Fail.init(message: "Shared succesfully"), for: req)
+                }
             } else {
                 return DataWrapper.encodeResponse(data: Fail.init(message: "No user with this email"), for: req)
             }
@@ -74,7 +55,11 @@ extension AppUserPlantsController.TokenProtected: RouteCollection {
                 let index = secondUser.sharedPlantIds.firstIndex(of: reqBody.plantId) ?? 0
                 secondUser.sharedPlantIds.remove(at: index)
                 _ = secondUser.save(on: req.db)
-                return DataWrapper.encodeResponse(data: Fail.init(message: "UnShared succesfully"), for: req)
+                return AppUserPlant.query(on: req.db).filter(\.$id == reqBody.plantId).first().flatMap { (userPlant) in
+                    userPlant?.assignedToFriendsWithIds.append(secondUser.id ?? UUID())
+                    _ = userPlant?.save(on: req.db)
+                    return DataWrapper.encodeResponse(data: Fail.init(message: "UnShared succesfully"), for: req)
+                }
             } else {
                 return DataWrapper.encodeResponse(data: Fail.init(message: "No user with this email"), for: req)
             }

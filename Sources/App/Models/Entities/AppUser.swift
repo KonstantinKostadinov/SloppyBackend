@@ -5,6 +5,13 @@
 //  Created by Konstantin Kostadinov on 28.07.21.
 //
 
+//
+//  File.swift
+//
+//
+//  Created by Konstantin Kostadinov on 28.07.21.
+//
+
 import Vapor
 import Foundation
 import Fluent
@@ -23,10 +30,10 @@ final class AppUser: Model, Content {
     var passwordHash: String
 
     @Field(key: "plantIds")
-    var plantIds: [UUID]
+    var plantIds: [AppUserPlant.IDValue]
 
     @Field(key: "sharedPlantIds")
-    var sharedPlantIds: [UUID]
+    var sharedPlantIds: [AppUserPlant.IDValue]
     
     var response: AppUserResponse {
         .init(email: email, userID: id!)
@@ -42,7 +49,7 @@ final class AppUser: Model, Content {
     
     init() {}
     
-    init(id: UUID? = nil, email: String, passwordHash: String, plantIds: [UUID] = [UUID](), sharedPlantIds: [UUID] = [UUID]()){
+    init(id: UUID? = nil, email: String, passwordHash: String, plantIds: [AppUserPlant.IDValue] = [], sharedPlantIds: [AppUserPlant.IDValue] = []) {
         self.id = id
         self.email = email
         self.passwordHash = passwordHash
