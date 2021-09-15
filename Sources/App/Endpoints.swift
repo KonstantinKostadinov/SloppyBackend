@@ -36,5 +36,7 @@ extension Endpoint.API {
         static let shareMyPlant: [PathComponent] = userPlants + ["shareMyPlant"]
         static let deleteMyPlant: [PathComponent] = userPlants + ["deleteMyPlant"]
         static let unshareMyPlant: [PathComponent] = userPlants + ["unshareMyPlant"]
+        static let returnOwnedAndSharedPlants: [PathComponent] = userPlants + ["returnOwnedAndSharedPlants"]
+        static let waterPlant: [PathComponent] = userPlants + ["waterPlant"]
     }
 }

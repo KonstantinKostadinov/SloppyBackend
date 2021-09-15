@@ -25,3 +25,4 @@ struct AppPlantResponse: Content {
     var whereItGrowsBest: String
     var potentialProblems: [String]
 }
+

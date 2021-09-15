@@ -53,21 +53,21 @@ extension AppUserController.PasswordProtected: RouteCollection {
                     return DataWrapper.encodeResponse(data: loginResponse, for: req)
                     // login has succeeded
                 } else {
-                    let failStruct = Fail(message: "wrong pass")
+                    let failStruct = ResponseStructure(message: "wrong pass")
                     return DataWrapper.encodeResponse(data: failStruct, for: req)
                 }
             } else {
-                let failStruct = Fail(message: "ne rapnato")
+                let failStruct = ResponseStructure(message: "ne rapnato")
                 return DataWrapper.encodeResponse(data: failStruct, for: req)
             }
             } catch {
-                let failStruct = Fail(message: error.localizedDescription)
+                let failStruct = ResponseStructure(message: error.localizedDescription)
                 return DataWrapper.encodeResponse(data: failStruct, for: req)
             }
-            let failStruct = Fail(message: "krai do ")
+            let failStruct = ResponseStructure(message: "krai do ")
             return DataWrapper.encodeResponse(data: failStruct, for: req)
         }
-        let failStruct = Fail(message: "posleno")
+        let failStruct = ResponseStructure(message: "posleno")
         return DataWrapper.encodeResponse(data: failStruct, for: req)
         
 
@@ -102,6 +102,6 @@ extension AppUserController.TokenProtected: RouteCollection {
 }
 
 
-struct Fail: Content {
+struct ResponseStructure: Content {
     var message: String
 }

@@ -19,7 +19,9 @@ struct AppUserPlantMigration: Migration {
             .field("timesPlantIsWatered",.int)
             .field("name", .string)
             .field("lastTimeWatered", .double)
-            .field("parentId", .uuid, .references("plants", "id"), .required)
+            .field("parentId", .uuid, .references("users", "id"), .required)
+            .field("plantMainParent", .string)
+            .field("daysToWater", .int)
             .field("assignedToFriendsWithIds", .array(of: .uuid))
             .create()
     }

@@ -29,6 +29,12 @@ final class AppUserPlant: Model, Content {
 
     @Field(key: "lastTimeWatered")
     var lastTimeWatered: Double
+    
+    @Field(key: "daysToWater")
+    var daysToWater: Int
+
+    @Field(key: "plantMainParent")
+    var plantMainParent: String
 
     @Field(key: "assignedToFriendsWithIds")
     var assignedToFriendsWithIds: [AppUser.IDValue]
@@ -39,13 +45,15 @@ final class AppUserPlant: Model, Content {
 
     init() {}
 
-    init(id: UUID? = nil, parentId: AppPlant.IDValue, notes: String, timesPlantIsWatered: Int, name: String, lastTimeWatered: Double/*, assignedToFriedsWithIds: [UUID]*/) {
+    init(id: UUID? = nil, parentId: AppPlant.IDValue, notes: String, timesPlantIsWatered: Int, name: String, lastTimeWatered: Double, daysToWater: Int, plantMainParent: String/*, assignedToFriedsWithIds: [UUID]*/) {
         self.id = id
         self.$parentUser.id = parentId
         self.notes = notes
         self.timesPlantIsWatered = timesPlantIsWatered
         self.name = name
         self.lastTimeWatered = lastTimeWatered
+        self.daysToWater = daysToWater
+        self.plantMainParent = plantMainParent
         self.assignedToFriendsWithIds = []
     }
 }
